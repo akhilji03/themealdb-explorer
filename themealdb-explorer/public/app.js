@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('randomBtn').addEventListener('click', fetchRandomMeal);
 });
 
-// Fetch and display food categories
 async function fetchCategories() {
     const res = await fetch('/api/categories');
     const data = await res.json();
@@ -27,21 +26,18 @@ async function fetchCategories() {
     });
 }
 
-// Search meals
 async function searchMeals(query) {
     const res = await fetch(`/api/search?s=${query}`);
     const data = await res.json();
     displayMeals(data.meals);
 }
 
-// Get a random meal
 async function fetchRandomMeal() {
     const res = await fetch('/api/random');
     const data = await res.json();
     displayMeals(data.meals);
 }
 
-// Render meal data to the UI
 function displayMeals(meals) {
     const container = document.getElementById('mealContainer');
     container.innerHTML = '';
@@ -52,7 +48,6 @@ function displayMeals(meals) {
     }
 
     meals.forEach(meal => {
-                // Dynamically parse up to 20 ingredients and measures
                 const ingredients = [];
                 for (let i = 1; i <= 20; i++) {
                     if (meal[`strIngredient${i}`]) {
@@ -60,7 +55,6 @@ function displayMeals(meals) {
             }
         }
 
-        // Format YouTube Link into an embeddable URL
         let videoEmbed = '';
         if (meal.strYoutube) {
             const videoId = meal.strYoutube.split('v=')[1];
